@@ -22,16 +22,18 @@ def lidar_plot():
     app = d(__name__)
 
     app.layout = html.Div([
-            html.Div(html.Img(src=pil_img),style={'width':'150','height':'150'}),
-            html.Div(id='container-button-basic',children='Enter a value and press submit'),
-        
-            html.Div(id='Title',
+
+            html.Div(html.Img(src=img_src),style={'padding-top': '10px'}),
+            html.H1(id='Title',
                     children=' Deadly waves :',
                     style={
-                        'vertical-align' : 'center',
-                        'color': 'blue'
+                        'text-align' : 'center',
+                        'color': 'blue',
+                        'font-family':'robotoLight'
                     }),
-            
+            html.Div(id='container-button-basic',children='Enter a value and press submit'),
+        
+                       
             
             html.Div(dcc.Input(id='input-on-submit', type='text')),
             html.Button(children = 'Submit', id='submit-val', n_clicks=0),
@@ -49,7 +51,9 @@ def lidar_plot():
             prevent_initial_call=True  
         )
     def rien (n_clicks,value) :
-        txt = "T'as cliqué 😉" 
+        
+        essais = 3 - n_clicks
+        txt = "T'as cliqué 😉"+str(n_clicks)+" fois Il te reste : "+str(essais)+" essais !" 
         print(n_clicks,value) 
         return txt
         # if ( (n_clicks%1) == 2) :
