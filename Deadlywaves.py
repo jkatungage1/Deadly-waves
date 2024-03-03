@@ -1,5 +1,10 @@
 from dash import Dash as d, html, dash, dash_table, dcc, callback, Output, Input,State,ctx
 import json, logging, time, os, pandas as pd, plotly.graph_objects as go
+from PIL import Image
+
+
+img_src= 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmZlerAavnOiz98igv9owprofau87uNoWPxrLL3OwJUQ&s'    #
+pil_img = Image.open("C:/Users/Muken/OneDrive/Travail/Mukendi_jacques/English/Escape game/webimg.png")
 
 log = logging.getLogger('werkzeug')
 log.setLevel(logging.ERROR)
@@ -16,7 +21,8 @@ def lidar_plot():
 
     app = d(__name__)
 
-    app.layout = html.Img('webimg.png'),html.Div([
+    app.layout = html.Div([
+            html.Div(html.Img(src=pil_img),style={'width':'150','height':'150'}),
             html.Div(id='container-button-basic',children='Enter a value and press submit'),
         
             html.Div(id='Title',
