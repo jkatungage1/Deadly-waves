@@ -3,8 +3,7 @@ import dash,json, logging, time, os, pandas as pd, plotly.graph_objects as go
 from PIL import Image
 
 
-img_src= 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmZlerAavnOiz98igv9owprofau87uNoWPxrLL3OwJUQ&s'  
-game_src= ''  
+img_src= 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmZlerAavnOiz98igv9owprofau87uNoWPxrLL3OwJUQ&s'    
 pil_img = Image.open("webimg.png")
 
 log = logging.getLogger('werkzeug')
@@ -18,53 +17,26 @@ external_stylesheet = ['https://codepen.io/chiriddyp/pen/bWLwgP.css']
 
 def Deadly_waves():
 
-    app = d(__name__,use_pages=True)
+    app = d(__name__,use_pages=False)
 
-    app.layout = html.Div(
-        
-        # style={
-        # #         'background-image': 'url(img_src)',
-        # #         'background-repeat': 'no-repeat',
-        # #         'background-position': 'right top',
-        # #         'background-size': '150px 100px'
-        #     },
-        
-        # 'background-image': 'url("/assets/wallpaper.jpg")', 
-        #                      'background-size': 'cover', 'background-repeat': 'no-repeat',
-        #                      'background-position': 'center', 'height': '100vh'},
-    
-        [
-        
+    app.layout = html.Div([
 
-
-            html.Div([html.Img(id='cachan_image',
-                              src=img_src,style={
-                                                  'width':'100px',
-                                                  'height':'auto',
-                                                  'padding-top': '0px',
-                                                  'padding-left' :'0px'
+            html.Div(html.Img(src=img_src),style={
+                                                  'fontsize':'50',
+                                                  'padding-top': '10px',
+                                                  'padding-left' :'auto'
                                                   
-            })
-    
-            ]),
+                                                  }),
             
             html.H1(id='Title',
-                    children=' Deadly waves Main page :',
+                    children=' Deadly waves :',
                     style={
-                        'textAlign' : 'center',
+                        'text-align' : 'center',
                         'color': 'blue',
                         'font-family':'monospace'
                     }),
             
-            html.Div([
-                
-                dcc.Link(page['name']+"  |  ",href=page['path'])
-                for page in dash.page_registry.values()
-            ]),
             
-            html.Hr(),
-            
-            dash.page_container,
             html.Div(id='container-button-basic',children='Who is the killer ? QUICK! The waves are comming and you only have three tries to start the disruptor !'),
         
                        
@@ -79,7 +51,6 @@ def Deadly_waves():
                 }),
             
             dcc.Interval(id="refresh-interval", disabled=False, interval=100)
-            
     ])
 
 

@@ -14,7 +14,7 @@ layout = html.Div([
                                                   'padding-top': '0px',
                                                   'padding-left' :'0px'
                                                   
-            })),
+    })),
             
     html.H1(id='Title',
                     children=' Puzzle 1',
@@ -22,5 +22,5 @@ layout = html.Div([
                         'text-align' : 'center',
                         'color': 'Red',
                         'font-family':'monospace'
-                    }),
+    })
 ])
