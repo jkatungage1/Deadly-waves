@@ -1,9 +1,9 @@
 from dash import Dash as d, html, dash, dash_table, dcc, callback, Output, Input,State,ctx
-import dash,json, logging, time, os, pandas as pd, plotly.graph_objects as go
+import dash,json, logging, time, os, pandas as pd, plotly.graph_objects as go,random
 from PIL import Image
 from flask import request
 
-EQUIPES = [[]]
+EQUIPES = []
 img_src= 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmZlerAavnOiz98igv9owprofau87uNoWPxrLL3OwJUQ&s'  
 game_src= ''  
 pil_img = Image.open("webimg.png")
@@ -58,8 +58,8 @@ def Deadly_waves():
                     children=' BEWARE.. the Deadly waves are coming  :',
                     style={
                         'textAlign' : 'center',
-                        'color': 'blue',
-                        'font-family':'monospace'
+                        'color': '#316171ad',
+                        'font-family':"'Courier New', monospace"
                     }),
             
             html.Div([
@@ -74,7 +74,7 @@ def Deadly_waves():
             
             
             
-            html.Div(id='container-button-basic',children='What is the name of your team ? !'),
+            html.Div(id='Start Text',children='What is the name of your team ? 😶‍🌫️'),
             html.Div(dcc.Input(id='input-on-submit', type='text',
                     style={
                         'width':'180px',
@@ -114,26 +114,62 @@ def Deadly_waves():
            
             # dcc.Markdown('what frequency is represented by this CYMATICS '),
             # 
-            # dcc.Dropdown(options=[250,440,1000,1000000],id='frequences',style={
-            #     'width':'60%',
-            #     'padding-left' : '35%'
-            #     }),
             
-            dcc.Interval(id="refresh-interval", disabled=False, interval=100)
+            
+            dcc.Interval(id="refresh-interval", interval=500),# disabled=False),
+            html.Div(id='Team Ip address',children='IP',style={
+                
+                'height':'52%',
+                'padding-top': '150px',
+                'padding-left' :'0px'
+                
+            }),
+            
             
     ])
+    
+    # @callback(        
+    #         Output("refresh-interval","interval"),
+    #         [Input("frequences","value")]    
+    # )
+    # def set_speed (value) :
+    #     return value
+    
     @callback(
-            Output(component_id='container-button-basic', component_property='children'),
+            Output(component_id='Start Text', component_property='children'),
             # Input("refresh-interval", "n_intervals"),
             Input("submit-val","n_clicks"),
-            # State('input-on-submit', 'value'),
+            State('input-on-submit', 'value'),
             prevent_initial_call=True  
+
         )
-    def rien (n_clicks) :
+    def rien (n_clicks,value) :
         global EQUIPES
+        
+        EQUIPES.append([value,request.remote_addr])
+        print (EQUIPES)
+        txt = "Vous êtes enregistrés en tant qu'équipe {Teamname} : {ipaddress}!".format(Teamname=value,ipaddress=request.remote_addr)
+        return txt
+    
+    
+    @callback(
+            Output("Team Ip address","children"),
+            Input("refresh-interval", "n_intervals")
+        )
+    def get_ip (n_intervals) :
        
         
-        return None
+        # print(ipa)
+        for i in range(len(EQUIPES)) :
+            time.sleep(random.randint(0,1))
+            ipa = request.remote_addr
+            if ( ipa == EQUIPES[i][1]): 
+                # print(EQUIPES[i])
+                return str(EQUIPES[i][0])
+            else : None
+    
+        
+
 
 
     return app

@@ -37,4 +37,12 @@ layout = html.Div([
                         'color': 'Red',
                         'font-family':'monospace'
                     }),
+    dcc.Dropdown(options=[300,500,1000,10000],id='frequences',style={
+                # 'width':'60%',
+                'padding-left' : '50%',                                                             
+                'width':'100px',
+                'height':'auto',
+                'padding-top': '0px',
+                'padding-left' :'0px'                                     
+            },disabled=True,)
 ])

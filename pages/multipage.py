@@ -15,12 +15,13 @@ layout = html.Div([
     
 
     
-    html.Div(html.Img(id='cachan_image',
+    html.Div(html.Img(id='Network',
                               src=img_src,style={
                                                   'width':'200px',
                                                   'height':'auto',
-                                                  'padding-top': '0px',
-                                                  'padding-left' :'465px'                                          
+                                                  'display': 'block',
+                                                  'margin-left' :'auto',
+                                                  'margin-right' :'auto'                                          
     })),
     
     html.Div([html.Div([
@@ -37,20 +38,21 @@ layout = html.Div([
                         'color': 'blue',
                         'font-family':'monospace'
     })
+    
+   
 ])
 
 @callback(
-            Output(component_id='container-button-basic', component_property='children'),
-            # Input("refresh-interval", "n_intervals"),
+            Output(component_id='Title', component_property='children'),
             Input("submit-val","n_clicks"),
             State('input-on-submit', 'value'),
             prevent_initial_call=True  
         )
 def rien (n_clicks,value) :
-    global EQUIPES
     
+    global EQUIPES
     txt = "Welcome team {value} the game will start as you press the start Button !".format(value=value) 
-    print(n_clicks,value) 
+    # print(n_clicks,value) 
     EQUIPES.append(value)
     
     

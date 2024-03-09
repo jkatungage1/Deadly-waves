@@ -9,10 +9,12 @@ layout = html.Div([
     
     html.Div(html.Img(id='cachan_image',
                               src=img_src,style={
-                                                  'width':'500px',
-                                                  'height':'auto',
-                                                  'padding-top': '0px',
-                                                  'padding-left' :'0px'
+                                  
+                                'width':'500px',
+                                'display':'block',
+                                'height':'auto',
+                                'margin-right': 'auto',
+                                'margin-left' :'auto'
                                                   
             })),
             
