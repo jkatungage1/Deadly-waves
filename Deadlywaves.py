@@ -109,11 +109,11 @@ def Deadly_waves():
 
             ,
            
-            html.Button(children = 'Start game !', id='start game', n_clicks=0,),
+            html.Button(children = dcc.Link('CYMATICS',href='https://en.wikipedia.org/wiki/Cymatics'), id='start game', n_clicks=0,),
            
            
             # dcc.Markdown('what frequency is represented by this CYMATICS '),
-            # dcc.Link('CYMATICS',href='https://en.wikipedia.org/wiki/Cymatics'),
+            # 
             # dcc.Dropdown(options=[250,440,1000,1000000],id='frequences',style={
             #     'width':'60%',
             #     'padding-left' : '35%'
