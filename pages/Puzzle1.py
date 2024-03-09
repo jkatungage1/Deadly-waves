@@ -22,5 +22,7 @@ layout = html.Div([
                         'text-align' : 'center',
                         'color': 'Red',
                         'font-family':'monospace'
-    })
+    }),
+    
+    html.Div(className='flex-container',children=[1,2,3] )
 ])
