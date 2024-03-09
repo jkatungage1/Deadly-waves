@@ -37,7 +37,47 @@ layout = html.Div([
                         'text-align' : 'center',
                         'color': 'blue',
                         'font-family':'monospace'
-    })
+    }),
+    html.Div(id='Start Text',children='What is the name of your team ? 😶‍🌫️'),
+            html.Div(dcc.Input(id='input-on-submit', type='text',
+                    style={
+                        'width':'180px',
+                        'height':'23px',
+                        'padding-top': '5px',
+                        'verticalAlign':'middle'
+                    })),
+            html.Button(children = 'Submit', id='submit-val', n_clicks=0)
+            
+            
+            # { this is the style sheet for the button 
+
+#     display: inline-block;
+#     height: 24px;
+#     padding: 0 30px;
+#     color: #555;
+#     text-align: justify;
+#     font-size: 9px;
+#     font-weight: 600;
+#     line-height: 2;
+#     letter-spacing: .1rem;
+#     text-transform: uppercase;
+#     text-decoration: none;
+#     white-space: nowrap;
+#     background-color: transparent;
+#     border-radius: 4px;
+#     border: 1px solid #bbb;
+#     cursor: pointer;
+#     box-sizing: border-box;
+# }
+
+
+            ,
+           
+            html.Button(children = dcc.Link('CYMATICS',href='https://en.wikipedia.org/wiki/Cymatics'), id='start game', n_clicks=0,),
+           
+           
+            # dcc.Markdown('what frequency is represented by this CYMATICS '),
+            # 
     
    
 ])

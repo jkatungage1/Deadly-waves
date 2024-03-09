@@ -71,55 +71,12 @@ def Deadly_waves():
             html.Hr(),
             
             dash.page_container,
-            
-            
-            
-            html.Div(id='Start Text',children='What is the name of your team ? 😶‍🌫️'),
-            html.Div(dcc.Input(id='input-on-submit', type='text',
-                    style={
-                        'width':'180px',
-                        'height':'23px',
-                        'padding-top': '5px',
-                        'verticalAlign':'middle'
-                    })),
-            html.Button(children = 'Submit', id='submit-val', n_clicks=0)
-            
-            
-            # { this is the style sheet for the button 
-
-#     display: inline-block;
-#     height: 24px;
-#     padding: 0 30px;
-#     color: #555;
-#     text-align: justify;
-#     font-size: 9px;
-#     font-weight: 600;
-#     line-height: 2;
-#     letter-spacing: .1rem;
-#     text-transform: uppercase;
-#     text-decoration: none;
-#     white-space: nowrap;
-#     background-color: transparent;
-#     border-radius: 4px;
-#     border: 1px solid #bbb;
-#     cursor: pointer;
-#     box-sizing: border-box;
-# }
-
-
-            ,
-           
-            html.Button(children = dcc.Link('CYMATICS',href='https://en.wikipedia.org/wiki/Cymatics'), id='start game', n_clicks=0,),
-           
-           
-            # dcc.Markdown('what frequency is represented by this CYMATICS '),
-            # 
-            
+          
             
             dcc.Interval(id="refresh-interval", interval=500),# disabled=False),
             html.Div(id='Team Ip address',children='IP',style={
                 
-                'height':'52%',
+                'display':'block',
                 'padding-top': '150px',
                 'padding-left' :'0px'
                 
@@ -159,15 +116,17 @@ def Deadly_waves():
     def get_ip (n_intervals) :
        
         
-        # print(ipa)
-        for i in range(len(EQUIPES)) :
-            time.sleep(random.randint(0,1))
-            ipa = request.remote_addr
-            if ( ipa == EQUIPES[i][1]): 
-                # print(EQUIPES[i])
-                return str(EQUIPES[i][0])
-            else : None
-    
+        if (len(EQUIPES)==0):
+            return 'IP'
+        else :
+            for i in range(len(EQUIPES)) :
+                time.sleep(random.randint(0,1))
+                ipa = request.remote_addr
+                if ( ipa == EQUIPES[i][1]): 
+                    # print(EQUIPES[i])
+                    return "TeamName : "+str(EQUIPES[i][0])
+                else : None
+        
         
 
 
