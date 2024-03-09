@@ -3,7 +3,7 @@ import json, logging, time, os, pandas as pd, plotly.graph_objects as go, dash a
 from PIL import Image
 
 img_src= 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmZlerAavnOiz98igv9owprofau87uNoWPxrLL3OwJUQ&s'    
-d.register_page(__name__,path='/') #'/' means it's the maine page
+d.register_page(__name__) #'/' means it's the maine page
 
 layout = html.Div([
     
