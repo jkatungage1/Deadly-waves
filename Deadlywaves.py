@@ -4,6 +4,7 @@ from PIL import Image
 from flask import request
 
 EQUIPES = []
+DEFAULT_LEVEL = 0
 img_src= 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmZlerAavnOiz98igv9owprofau87uNoWPxrLL3OwJUQ&s'  
 game_src= ''  
 pil_img = Image.open("webimg.png")
@@ -101,11 +102,27 @@ def Deadly_waves():
 
         )
     def rien (n_clicks,value) :
-        global EQUIPES
+        # global EQUIPES
         
-        EQUIPES.append([value,request.remote_addr])
-        print (EQUIPES)
-        txt = "Vous êtes enregistrés en tant qu'équipe {Teamname} : {ipaddress}!".format(Teamname=value,ipaddress=request.remote_addr)
+        # EQUIPES.append([value,request.remote_addr,0])
+        # print (EQUIPES)
+        # txt = "Vous êtes enregistrés en tant qu'équipe {Teamname} : {ipaddress}!".format(Teamname=value,ipaddress=request.remote_addr)
+        # return txt
+        global EQUIPES
+        ipa = request.remote_addr
+        free = True
+        for teams in EQUIPES:
+            if ipa == teams[1] :
+                free = False 
+            else : 
+                free = True
+        if ( free == 1) :
+            EQUIPES.append([value,ipa,DEFAULT_LEVEL])
+            print (EQUIPES)
+            txt = "Vous êtes enregistrés en tant qu'équipe {Teamname} : {ipaddress}!".format(Teamname=value,ipaddress=request.remote_addr)
+        else : txt = "Vous avez déjà un nom d'équipe !"
+                
+                 
         return txt
     
     
@@ -124,7 +141,7 @@ def Deadly_waves():
                 ipa = request.remote_addr
                 if ( ipa == EQUIPES[i][1]): 
                     # print(EQUIPES[i])
-                    return "TeamName : "+str(EQUIPES[i][0])
+                    return "TeamName : {teamname}  |  Level : {level}↗️ ".format(teamname=str(EQUIPES[i][0]),level=str(EQUIPES[i][2]))
                 else : None
         
         

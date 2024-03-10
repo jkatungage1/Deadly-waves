@@ -2,7 +2,7 @@ from dash import html, dash, dash_table, dcc, callback, Output, Input,State,ctx
 import json, logging, time, os, pandas as pd, plotly.graph_objects as go, dash as d
 from PIL import Image
 from Deadlywaves import EQUIPES
-
+from flask import request
 
 
 
@@ -85,15 +85,35 @@ layout = html.Div([
 @callback(
             Output(component_id='Title', component_property='children'),
             Input("submit-val","n_clicks"),
-            State('input-on-submit', 'value'),
+            
             prevent_initial_call=True  
         )
-def rien (n_clicks,value) :
+def rien (n_clicks) :
+   
+    from Deadlywaves import EQUIPES
+    ipa = request.remote_addr
+    free = True
+    id = None
+    for teams in EQUIPES:
+        
+        if ipa == teams[1] :
+            free = False 
+            id = teams[0]
+          
+        else : 
+            free = True
+            id = teams[0]
+         
+        if ( free == 0) :
+            
+            txt = "Welcome team {value} the game will start as you press the start Button !".format(value=id )
+            return txt
+        else : 
+            txt = "Welcome team {value} the game will start as you press the start Button !".format(value=id )
+            return txt
     
-    global EQUIPES
-    txt = "Welcome team {value} the game will start as you press the start Button !".format(value=value) 
+    # txt = "Welcome team {value} the game will start as you press the start Button !".format(value=str(EQUIPES[][0]) )
     # print(n_clicks,value) 
-    EQUIPES.append(value)
     
     
-    return txt
+    
