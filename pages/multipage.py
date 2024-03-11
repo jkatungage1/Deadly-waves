@@ -2,6 +2,7 @@ from dash import html, dash, dash_table, dcc, callback, Output, Input,State,ctx
 import json, logging, time, os, pandas as pd, plotly.graph_objects as go, dash as d
 from PIL import Image
 from Deadlywaves import EQUIPES
+from Deadlywaves import PAGES
 from flask import request
 
 
@@ -46,7 +47,7 @@ layout = html.Div([
                         'padding-top': '5px',
                         'verticalAlign':'middle'
                     })),
-            html.Button(children = 'Submit', id='submit-val', n_clicks=0)
+            html.Button(children = 'Submit', id='submit-val', n_clicks=0),
             
             
             # { this is the style sheet for the button 
@@ -71,9 +72,9 @@ layout = html.Div([
 # }
 
 
-            ,
+            
            
-            html.Button(children = dcc.Link('CYMATICS',href='https://en.wikipedia.org/wiki/Cymatics'), id='start game', n_clicks=0,),
+            html.Button(id='Start',children = dcc.Link("Start !",href='http://127.0.0.1:8050/puzzle1')),
            
            
             # dcc.Markdown('what frequency is represented by this CYMATICS '),
@@ -114,6 +115,16 @@ def rien (n_clicks) :
     
     # txt = "Welcome team {value} the game will start as you press the start Button !".format(value=str(EQUIPES[][0]) )
     # print(n_clicks,value) 
+
+
+@callback(Output('Start', 'disabled'),
+             [Input('submit-val', 'n_clicks')])
+def set_button_enabled_state(n_clicks):
+    
+    
+    
+    if n_clicks <=
+    return on_off
     
     
     

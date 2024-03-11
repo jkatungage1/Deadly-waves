@@ -1,6 +1,7 @@
 from dash import html, dash, dash_table, dcc, callback, Output, Input,State,ctx
 import json, logging, time, os, pandas as pd, plotly.graph_objects as go, dash as d
 from PIL import Image
+from flask import request
 
 img_src= 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmZlerAavnOiz98igv9owprofau87uNoWPxrLL3OwJUQ&s'    
 d.register_page(__name__) #'/' means it's the maine page
