@@ -1,7 +1,7 @@
-from dash import html, dash, dash_table, dcc, callback, Output, Input,State,ctx
-import json, logging, time, os, pandas as pd, plotly.graph_objects as go, dash as d
+from dash import html, dash_table, dcc, callback, Output, Input,State,ctx
+import json, logging, time, os, pandas as pd, plotly.graph_objects as go, dash as d, dash_bootstrap_components as dbc
 from PIL import Image
-from Deadlywaves import EQUIPES
+from Deadlywaves import EQUIPES,hots
 from Deadlywaves import PAGES
 from flask import request
 
@@ -74,11 +74,11 @@ layout = html.Div([
 
             
            
-            html.Button(id='Start',children = dcc.Link("Start !",href='http://127.0.0.1:8050/puzzle1')),
+            html.Button(dbc.Button(id='Start',children = "Start !",href='http://'+hots+':8050/puzzle1',disabled=True)), #href='http://127.0.0.1:8050/puzzle1'
            
            
             # dcc.Markdown('what frequency is represented by this CYMATICS '),
-            # 
+            
     
    
 ])
@@ -118,12 +118,12 @@ def rien (n_clicks) :
 
 
 @callback(Output('Start', 'disabled'),
-             [Input('submit-val', 'n_clicks')])
-def set_button_enabled_state(n_clicks):
+             [Input('submit-val', 'n_clicks'),Input('Team Ip address','children')])
+def set_button_enabled_state(n_clicks,children):
     
-    
-    
-    if n_clicks <=
+    if (n_clicks > 0 and children != 'IP') :
+        on_off = False
+    else : on_off = True
     return on_off
     
     

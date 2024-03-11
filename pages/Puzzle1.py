@@ -1,6 +1,8 @@
 from dash import html, dash, dash_table, dcc, callback, Output, Input,State,ctx
-import json, logging, time, os, pandas as pd, plotly.graph_objects as go, dash as d
+import json, logging, time, os, pandas as pd, plotly.graph_objects as go, dash as d, dash_bootstrap_components as dbc
 from PIL import Image
+from Deadlywaves import EQUIPES,hots
+from Deadlywaves import PAGES
 from flask import request
 
 img_src= 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmZlerAavnOiz98igv9owprofau87uNoWPxrLL3OwJUQ&s'    
@@ -25,5 +27,9 @@ layout = html.Div([
                         'font-family':'monospace'
     }),
     
-    html.Div(className='flex-container',children=[1,2,3] )
+    html.Div(className='flex-container',children=[1,2,3] ),
+    
+    
+    
+    html.Button(dbc.Button(id='Start',children = "Start !",href='http://'+hots+':8050/puzzle1',disabled=True)),
 ])

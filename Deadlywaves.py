@@ -6,6 +6,7 @@ from flask import request
 EQUIPES = []
 PAGES = []
 DEFAULT_LEVEL = 0
+hots="192.168.137.1"
 img_src= 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmZlerAavnOiz98igv9owprofau87uNoWPxrLL3OwJUQ&s'  
 game_src= ''  
 pil_img = Image.open("webimg.png")
@@ -144,7 +145,25 @@ def Deadly_waves():
                     return "TeamName : {teamname}  |  Level : {level}↗️ ".format(teamname=str(EQUIPES[i][0]),level=str(EQUIPES[i][2]))
                 else : None
         
+    
+    # @callback(
+    #     Output("Team Ip address","children"),
+    #     Input("refresh-interval", "n_intervals")
+    # )
+    # def get_ip (n_intervals) :
         
+        
+    #     if (len(EQUIPES)==0):
+    #         return 'IP'
+    #     else :
+    #         for i in range(len(EQUIPES)) :
+    #             time.sleep(random.randint(0,1))
+    #             ipa = request.remote_addr
+    #             if ( ipa == EQUIPES[i][1]): 
+    #                 # print(EQUIPES[i])
+    #                 return "TeamName : {teamname}  |  Level : {level}↗️ ".format(teamname=str(EQUIPES[i][0]),level=str(EQUIPES[i][2]))
+    #             else : None
+            
 
 
 
@@ -152,14 +171,14 @@ def Deadly_waves():
 
 
 if __name__ == '__main__':
-#   Deadly_waves().run_server(host="192.168.137.1", debug=True)
-    Deadly_waves().run_server(debug=True)
+  Deadly_waves().run_server(host=hots, debug=True)
+    # Deadly_waves().run_server(debug=True)
 
 
 # new_element = html.Div(
 #             style={
 #                 "width": "23%",
-#                 "display": "inline-block",
+#                 "display": "inline-block",  
 #                 "outline": "thin lightgrey solid",
 #                 "padding": 10,
 #             },
