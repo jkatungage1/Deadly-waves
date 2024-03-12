@@ -27,7 +27,16 @@ layout = html.Div([
                         'font-family':'monospace'
     }),
     
-    html.Div(className='flex-container',children=[1,2,3] ),
+    # html.Div(className='flex-container',children=[1,2,3] ),
+    html.Div(id='Start Text',children='What is the name of your team ? 😶‍🌫️'),
+            html.Div(dcc.Input(id='input-on-submit', type='text',
+                    style={
+                        'width':'180px',
+                        'height':'23px',
+                        'padding-top': '5px',
+                        'verticalAlign':'middle'
+                    })),
+            html.Button(children = 'Submit', id='submit-val', n_clicks=0),
     
     
     
