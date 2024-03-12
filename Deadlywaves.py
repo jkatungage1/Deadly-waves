@@ -4,6 +4,9 @@ from PIL import Image
 from flask import request
 
 EQUIPES = []
+PAGES = []
+DEFAULT_LEVEL = 0
+hots="192.168.137.1"
 img_src= 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmZlerAavnOiz98igv9owprofau87uNoWPxrLL3OwJUQ&s'  
 game_src= ''  
 pil_img = Image.open("webimg.png")
@@ -23,7 +26,7 @@ colors = {'background': '#ffffff',
 
 
 def Deadly_waves():
-
+    global PAGES
     app = d(__name__,use_pages=True,external_stylesheets = external_stylesheet)
 
     app.layout = html.Div(
@@ -62,78 +65,32 @@ def Deadly_waves():
                         'font-family':"'Courier New', monospace"
                     }),
             
-            html.Div([
+            # html.Div([
                 
-                dcc.Link(page['name']+"  |  ",href=page['path'])
-                for page in dash.page_registry.values()
-            ]),
+            #     # dcc.Link(page['name']+"  |  ",href=page['path'])
+            #     # for page in dash.page_registry.values()
+            #     # PAGES = [dcc.Link(page['name']+"  |  ",href=page['path'])
+            #     # for page in dash.page_registry.values()]
+            # ]),
             
             html.Hr(),
             
             dash.page_container,
-            
-            
-            
-            html.Div(id='Start Text',children='What is the name of your team ? 😶‍🌫️'),
-            html.Div(dcc.Input(id='input-on-submit', type='text',
-                    style={
-                        'width':'180px',
-                        'height':'23px',
-                        'padding-top': '5px',
-                        'verticalAlign':'middle'
-                    })),
-            html.Button(children = 'Submit', id='submit-val', n_clicks=0)
-            
-            
-            # { this is the style sheet for the button 
-
-#     display: inline-block;
-#     height: 24px;
-#     padding: 0 30px;
-#     color: #555;
-#     text-align: justify;
-#     font-size: 9px;
-#     font-weight: 600;
-#     line-height: 2;
-#     letter-spacing: .1rem;
-#     text-transform: uppercase;
-#     text-decoration: none;
-#     white-space: nowrap;
-#     background-color: transparent;
-#     border-radius: 4px;
-#     border: 1px solid #bbb;
-#     cursor: pointer;
-#     box-sizing: border-box;
-# }
-
-
-            ,
-           
-            html.Button(children = dcc.Link('CYMATICS',href='https://en.wikipedia.org/wiki/Cymatics'), id='start game', n_clicks=0,),
-           
-           
-            # dcc.Markdown('what frequency is represented by this CYMATICS '),
-            # 
-            
+          
             
             dcc.Interval(id="refresh-interval", interval=500),# disabled=False),
             html.Div(id='Team Ip address',children='IP',style={
                 
-                'height':'52%',
+                'display':'block',
                 'padding-top': '150px',
                 'padding-left' :'0px'
                 
             }),
             
-            
+                    
     ])
     
-    # @callback(        
-    #         Output("refresh-interval","interval"),
-    #         [Input("frequences","value")]    
-    # )
-    # def set_speed (value) :
-    #     return value
+  
     
     @callback(
             Output(component_id='Start Text', component_property='children'),
@@ -143,12 +100,30 @@ def Deadly_waves():
             prevent_initial_call=True  
 
         )
-    def rien (n_clicks,value) :
-        global EQUIPES
+    def equipes_ (n_clicks,value) :
+        # global EQUIPES
         
-        EQUIPES.append([value,request.remote_addr])
-        print (EQUIPES)
-        txt = "Vous êtes enregistrés en tant qu'équipe {Teamname} : {ipaddress}!".format(Teamname=value,ipaddress=request.remote_addr)
+        # EQUIPES.append([value,request.remote_addr,0])
+        # print (EQUIPES)
+        # txt = "Vous êtes enregistrés en tant qu'équipe {Teamname} : {ipaddress}!".format(Teamname=value,ipaddress=request.remote_addr)
+        # return txt
+        global EQUIPES, PAGES
+        PAGES = [dcc.Link(page['name']+"  |  ",href=page['path'])
+                for page in dash.page_registry.values()]
+        
+        ipa = request.remote_addr
+        free = True
+        for teams in EQUIPES:
+            if ipa == teams[1] :
+                free = False 
+            else : 
+                free = True
+        if ( free == 1) :
+            EQUIPES.append([value,ipa,DEFAULT_LEVEL])
+            print (EQUIPES)
+            txt = "Vous êtes enregistrés en tant qu'équipe {Teamname} : {ipaddress}!".format(Teamname=value,ipaddress=request.remote_addr)
+        else : txt = "Vous avez déjà un nom d'équipe !"
+                      
         return txt
     
     
@@ -157,18 +132,38 @@ def Deadly_waves():
             Input("refresh-interval", "n_intervals")
         )
     def get_ip (n_intervals) :
-       
         
-        # print(ipa)
-        for i in range(len(EQUIPES)) :
-            time.sleep(random.randint(0,1))
-            ipa = request.remote_addr
-            if ( ipa == EQUIPES[i][1]): 
-                # print(EQUIPES[i])
-                return str(EQUIPES[i][0])
-            else : None
+        
+        if (len(EQUIPES)==0):
+            return 'IP'
+        else :
+            for i in range(len(EQUIPES)) :
+                time.sleep(random.randint(0,1))
+                ipa = request.remote_addr
+                if ( ipa == EQUIPES[i][1]): 
+                    # print(EQUIPES[i])
+                    return "TeamName : {teamname}  |  Level : {level}↗️ ".format(teamname=str(EQUIPES[i][0]),level=str(EQUIPES[i][2]))
+                else : None
+        
     
+    # @callback(
+    #     Output("Team Ip address","children"),
+    #     Input("refresh-interval", "n_intervals")
+    # )
+    # def get_ip (n_intervals) :
         
+        
+    #     if (len(EQUIPES)==0):
+    #         return 'IP'
+    #     else :
+    #         for i in range(len(EQUIPES)) :
+    #             time.sleep(random.randint(0,1))
+    #             ipa = request.remote_addr
+    #             if ( ipa == EQUIPES[i][1]): 
+    #                 # print(EQUIPES[i])
+    #                 return "TeamName : {teamname}  |  Level : {level}↗️ ".format(teamname=str(EQUIPES[i][0]),level=str(EQUIPES[i][2]))
+    #             else : None
+            
 
 
 
@@ -176,6 +171,21 @@ def Deadly_waves():
 
 
 if __name__ == '__main__':
-  Deadly_waves().run_server(host="192.168.137.1", debug=True)
+  Deadly_waves().run_server(host=hots, debug=True)
+    # Deadly_waves().run_server(debug=True)
 
 
+# new_element = html.Div(
+#             style={
+#                 "width": "23%",
+#                 "display": "inline-block",  
+#                 "outline": "thin lightgrey solid",
+#                 "padding": 10,
+#             },
+#             children=[
+#                 html.Button(
+#                     "X",
+#                     id={"type": "dynamic-delete", "index": n_clicks},
+#                     n_clicks=0,
+#                     style={"display": "block"},
+#                 )]),

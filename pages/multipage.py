@@ -1,8 +1,9 @@
-from dash import html, dash, dash_table, dcc, callback, Output, Input,State,ctx
-import json, logging, time, os, pandas as pd, plotly.graph_objects as go, dash as d
+from dash import html, dash_table, dcc, callback, Output, Input,State,ctx
+import json, logging, time, os, pandas as pd, plotly.graph_objects as go, dash as d, dash_bootstrap_components as dbc
 from PIL import Image
-from Deadlywaves import EQUIPES
-
+from Deadlywaves import EQUIPES,hots
+from Deadlywaves import PAGES
+from flask import request
 
 
 
@@ -37,7 +38,47 @@ layout = html.Div([
                         'text-align' : 'center',
                         'color': 'blue',
                         'font-family':'monospace'
-    })
+    }),
+    html.Div(id='Start Text',children='What is the name of your team ? 😶‍🌫️'),
+            html.Div(dcc.Input(id='input-on-submit', type='text',
+                    style={
+                        'width':'180px',
+                        'height':'23px',
+                        'padding-top': '5px',
+                        'verticalAlign':'middle'
+                    })),
+            html.Button(children = 'Submit', id='submit-val', n_clicks=0),
+            
+            
+            # { this is the style sheet for the button 
+
+#     display: inline-block;
+#     height: 24px;
+#     padding: 0 30px;
+#     color: #555;
+#     text-align: justify;
+#     font-size: 9px;
+#     font-weight: 600;
+#     line-height: 2;
+#     letter-spacing: .1rem;
+#     text-transform: uppercase;
+#     text-decoration: none;
+#     white-space: nowrap;
+#     background-color: transparent;
+#     border-radius: 4px;
+#     border: 1px solid #bbb;
+#     cursor: pointer;
+#     box-sizing: border-box;
+# }
+
+
+            
+           
+            html.Button(dbc.Button(id='Start',children = "Start !",href='http://'+hots+':8050/puzzle1',disabled=True)), #href='http://127.0.0.1:8050/puzzle1'
+           
+           
+            # dcc.Markdown('what frequency is represented by this CYMATICS '),
+            
     
    
 ])
@@ -45,15 +86,45 @@ layout = html.Div([
 @callback(
             Output(component_id='Title', component_property='children'),
             Input("submit-val","n_clicks"),
-            State('input-on-submit', 'value'),
+            
             prevent_initial_call=True  
         )
-def rien (n_clicks,value) :
+def rien (n_clicks) :
+   
+    from Deadlywaves import EQUIPES
+    ipa = request.remote_addr
+    free = True
+    id = None
+    for teams in EQUIPES:
+        
+        if ipa == teams[1] :
+            free = False 
+            id = teams[0]
+          
+        else : 
+            free = True
+            id = teams[0]
+         
+        if ( free == 0) :
+            
+            txt = "Welcome team {value} the game will start as you press the start Button !".format(value=id )
+            return txt
+        else : 
+            txt = "Welcome team {value} the game will start as you press the start Button !".format(value=id )
+            return txt
     
-    global EQUIPES
-    txt = "Welcome team {value} the game will start as you press the start Button !".format(value=value) 
+    # txt = "Welcome team {value} the game will start as you press the start Button !".format(value=str(EQUIPES[][0]) )
     # print(n_clicks,value) 
-    EQUIPES.append(value)
+
+
+@callback(Output('Start', 'disabled'),
+             [Input('submit-val', 'n_clicks'),Input('Team Ip address','children')])
+def set_button_enabled_state(n_clicks,children):
+    
+    if (n_clicks > 0 and children != 'IP') :
+        on_off = False
+    else : on_off = True
+    return on_off
     
     
-    return txt
+    
