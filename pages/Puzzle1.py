@@ -5,7 +5,7 @@ from Deadlywaves import EQUIPES,hots
 from Deadlywaves import PAGES
 from flask import request
 
-img_src= 'https://cdn.discordapp.com/attachments/1075182862598414377/1216992530122543134/Colorful_Fruits_Straightforward_Education_Landscape_Poster.png?ex=6602679d&is=65eff29d&hm=66fe8e0923d57d7d5e3938c97ecd47c7d2aeb44fef931d1704e75ecd1406e217&'    
+img_src= 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmZlerAavnOiz98igv9owprofau87uNoWPxrLL3OwJUQ&s'    
 d.register_page(__name__) #'/' means it's the maine page
 
 layout = html.Div([

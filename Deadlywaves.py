@@ -8,6 +8,7 @@ PAGES = []
 DEFAULT_LEVEL = 0
 hots="192.168.137.1"
 img_src= 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmZlerAavnOiz98igv9owprofau87uNoWPxrLL3OwJUQ&s'  
+back_img = 'https://cdn.discordapp.com/attachments/1075182862598414377/1216992530122543134/Colorful_Fruits_Straightforward_Education_Landscape_Poster.png?ex=6602679d&is=65eff29d&hm=66fe8e0923d57d7d5e3938c97ecd47c7d2aeb44fef931d1704e75ecd1406e217&'
 game_src= ''  
 pil_img = Image.open("webimg.png")
 
@@ -17,7 +18,7 @@ log.setLevel(logging.ERROR)
 # df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/gapminder2007.csv')
 external_stylesheet = ['https://codepen.io/chiriddyp/pen/bWLwgP.css']
 
-colors = {'background': '#ffffff',
+colors = {'background': '#166fb7b0',
           'bg_home': '#666666',
           'text': '#ffa500',
           'background_plot': '#cccccc',
@@ -32,11 +33,11 @@ def Deadly_waves():
     app.layout = html.Div(
         
         style={
-                'backgroundColor' : colors['background'],
-                # 'background-image': 'url(img_src)',
-                'background-repeat': 'no-repeat'
-                # 'background-position': 'right top',
-                # 'background-size': '150px 100px'
+                # 'backgroundColor' : colors['background'],
+                'background-image': 'url('+str(back_img)+')',
+                'background-repeat': 'no-repeat',
+                'background-position-y': '10px',
+                'background-size': 'cover'
             },
         
         # 'background-image': 'url("/assets/wallpaper.jpg")', 
@@ -47,7 +48,7 @@ def Deadly_waves():
         
 
 
-            html.Div([html.Img(id='cachan_image',
+            html.Div(style = {}, children = [html.Img(id='cachan_image',
                               src=img_src,style={
                                                   'width':'100px',
                                                   'height':'auto',
@@ -61,6 +62,7 @@ def Deadly_waves():
             html.H1(id='Title',
                     children=' BEWARE.. the Deadly waves are coming  :',
                     style={
+                        'margin-top':'300px',
                         'textAlign' : 'center',
                         'color': '#316171ad',
                         'font-family':"'Courier New', monospace"
