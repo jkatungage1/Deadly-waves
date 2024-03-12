@@ -31,18 +31,19 @@ def Deadly_waves():
 
     app.layout = html.Div(
         
-        # style={
-        # #         'background-image': 'url(img_src)',
-        # #         'background-repeat': 'no-repeat',
-        # #         'background-position': 'right top',
-        # #         'background-size': '150px 100px'
-        #     },
+        style={
+                'backgroundColor' : colors['background'],
+                # 'background-image': 'url(img_src)',
+                'background-repeat': 'no-repeat'
+                # 'background-position': 'right top',
+                # 'background-size': '150px 100px'
+            },
         
         # 'background-image': 'url("/assets/wallpaper.jpg")', 
         #                      'background-size': 'cover', 'background-repeat': 'no-repeat',
         #                      'background-position': 'center', 'height': '100vh'},
     
-        [
+        children = [
         
 
 
