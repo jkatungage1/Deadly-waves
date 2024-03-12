@@ -17,12 +17,13 @@ layout = html.Div([
 
     
     html.Div(html.Img(id='Network',
-                              src=img_src,style={
-                                                  'width':'200px',
-                                                  'height':'auto',
-                                                  'display': 'block',
-                                                  'margin-left' :'auto',
-                                                  'margin-right' :'auto'                                          
+                        src=img_src,style={
+                                    'margin-top':'400px',
+                                    'width':'200px',
+                                    'height':'auto',
+                                    'display': 'block',
+                                    'margin-left' :'auto',
+                                    'margin-right' :'auto'                                          
     })),
     
     html.Div([html.Div([
@@ -39,15 +40,40 @@ layout = html.Div([
                         'color': 'blue',
                         'font-family':'monospace'
     }),
-    html.Div(id='Start Text',children='What is the name of your team ? 😶‍🌫️'),
-            html.Div(dcc.Input(id='input-on-submit', type='text',
-                    style={
-                        'width':'180px',
-                        'height':'23px',
-                        'padding-top': '5px',
-                        'verticalAlign':'middle'
-                    })),
-            html.Button(children = 'Submit', id='submit-val', n_clicks=0),
+    html.Div(style ={
+            'text-align' : 'center',
+            'display': 'block',
+            'margin-left' :'auto',
+            'margin-right' :'auto' 
+        },
+        id='Start Text',
+        children='What is the name of your team ? 😶‍🌫️'),
+    html.Div(style ={
+            'text-align' : 'center',
+            'display': 'block',
+            'margin-left' :'auto',
+            'margin-right' :'auto' 
+        },
+             
+    children = [dcc.Input(id='input-on-submit', type='text',
+            style={
+                
+                'width':'180px',
+                'height':'23px',
+                'padding-top': '5px',
+                'verticalAlign':'middle'
+    }),
+                html.Button(style ={
+                'width':'100px',
+                'height':'30px',
+                'line-height': '15px',
+                'verticalAlign':'middle'
+    },
+                            children = 'Submit', id='submit-val', n_clicks=0),
+    
+    ]),
+    
+    
             
             
             # { this is the style sheet for the button 
@@ -74,7 +100,12 @@ layout = html.Div([
 
             
            
-            html.Button(dbc.Button(id='Start',children = "Start !",href='http://'+hots+':8050/puzzle1',disabled=True)), #href='http://127.0.0.1:8050/puzzle1'
+            html.Button(style ={
+            'text-align' : 'center',
+            'display': 'block',
+            'margin-left' :'auto',
+            'margin-right' :'auto' 
+        },children = dbc.Button(id='Start',children = "Start !",href='http://'+hots+':8050/puzzle1',disabled=True)), #href='http://127.0.0.1:8050/puzzle1'
            
            
             # dcc.Markdown('what frequency is represented by this CYMATICS '),

@@ -37,7 +37,8 @@ def Deadly_waves():
                 'background-image': 'url('+str(back_img)+')',
                 'background-repeat': 'no-repeat',
                 'background-position-y': '10px',
-                'background-size': 'cover'
+                'background-size': 'contain',
+                'background-clip':'border-box'
             },
         
         # 'background-image': 'url("/assets/wallpaper.jpg")', 
@@ -53,20 +54,20 @@ def Deadly_waves():
                                                   'width':'100px',
                                                   'height':'auto',
                                                   'padding-top': '0px',
-                                                  'padding-left' :'0px'
+                                                  'padding-left' :'0px'                                                  
                                                   
             })
     
             ]),
             
-            html.H1(id='Title',
-                    children=' BEWARE.. the Deadly waves are coming  :',
-                    style={
-                        'margin-top':'300px',
-                        'textAlign' : 'center',
-                        'color': '#316171ad',
-                        'font-family':"'Courier New', monospace"
-                    }),
+            # html.H1(id='Title',
+            #         children=' BEWARE.. the Deadly waves are coming  :',
+            #         style={
+            #             'margin-top':'300px',
+            #             'textAlign' : 'center',
+            #             'color': '#316171ad',
+            #             'font-family':"'Courier New', monospace"
+            #         }),
             
             # html.Div([
                 
@@ -83,12 +84,22 @@ def Deadly_waves():
             
             dcc.Interval(id="refresh-interval", interval=500),# disabled=False),
             html.Div(id='Team Ip address',children='IP',style={
-                
+                'margin-top':'100px',
                 'display':'block',
-                'padding-top': '150px',
-                'padding-left' :'0px'
+                'padding-right': 'auto',
+                'padding-left' :'auto',
+                'textAlign' : 'center'
                 
             }),
+            html.Div(id='',children='By Zohra and Jacques',style={
+                'margin-top':'1000px'
+                # 'display':'block',
+                # 'padding-right': 'auto',
+                # 'padding-left' :'auto',
+                # 'textAlign' : 'center'
+                
+            })
+            
             
                     
     ])
@@ -129,7 +140,8 @@ def Deadly_waves():
                       
         return txt
     
-    
+    # def level_update ():
+    #     if()
     @callback(
             Output("Team Ip address","children"),
             Input("refresh-interval", "n_intervals")
