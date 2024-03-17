@@ -72,10 +72,7 @@ layout = html.Div([
                             children = 'Submit', id='submit-val', n_clicks=0),
     
     ]),
-    
-    
-            
-            
+      
             # { this is the style sheet for the button 
 
 #     display: inline-block;
@@ -97,9 +94,6 @@ layout = html.Div([
 #     box-sizing: border-box;
 # }
 
-
-            
-           
             html.Button(style ={
             'text-align' : 'center',
             'display': 'block',
