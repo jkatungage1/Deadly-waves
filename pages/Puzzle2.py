@@ -71,7 +71,7 @@ layout = html.Div([
                 'width':'200px',
                 
                                                    
-            },disabled=False,),
+            },disabled=False),
                       dcc.Dropdown(options=["cos * sin","vert = (e^ix+e^−ix) / 2 et rouge = e^ix-e^−ix / 2i","cos(x)","rouge = (e^ix+e^−ix) / 2  et vert = e^ix-e^−ix / 2i "]
                                    ,id='functions2',style={
                 
@@ -79,7 +79,7 @@ layout = html.Div([
                 'width':'200px',
                 'height':'30px'
                 
-            },disabled=False,),
+            },disabled=False),
                       
                       dcc.Dropdown(options=["cos * sin","vert = (e^ix+e^−ix) / 2 et rouge = e^ix-e^−ix / 2i","cos(x)","rouge = (e^ix+e^−ix) / 2  et vert = e^ix-e^−ix / 2i "]
                                    ,id='functions3',style={
@@ -121,12 +121,12 @@ layout = html.Div([
     
     html.Div(children=[
         
-        html.Div(id ='pz1av',children ="?") 
+        html.H4(id ='pz1av',children ="?") 
         #,html.H3(dbc.Textarea())
         
     ]),
     
-            
+          
     
     dcc.Dropdown(options=[300,500,1000,10000],id='frequences',style={
                 # 'width':'60%',
@@ -152,9 +152,27 @@ layout = html.Div([
 ])
 
 @callback(
-    Output("Start2","disabled"),
-    [State(),State(),State()],
-    prevent_
-    
-    
+    [Output("frequences","disabled"),Output("pz1av","children")],
+    Input("Start2","n_clicks"),
+    [State("functions1","value"),State("functions2","value"),State("functions3","value")],
+    prevent_initial_call=True  
 )
+def check_pz2 ( n_clicks, value1, value2, value3 ) :
+    
+    if (value1 == " ") :
+        None
+        if (value2 == " ") :
+            
+            return [False, "Vous pouvez passer à la suite !! "] 
+            if(value3 == " "):
+                return [False, "Vous pouvez passer à la suite !! "]  
+            else : None
+    else : 
+        return [True, "Le premier est faux ! "]           
+                
+# @callback(
+#     Output("Start2","disabled"),
+#     Input("Start2","n_clicks"),
+#     [State("frequences","value")],
+#     prevent_initial_call=True  
+# )

@@ -1,8 +1,9 @@
 from dash import html, dash, dash_table, dcc, callback, Output, Input,State,ctx
 import json, logging, time, os, pandas as pd, plotly.graph_objects as go, dash as d, dash_bootstrap_components as dbc
 from PIL import Image
-from Deadlywaves import EQUIPES,hots
-from Deadlywaves import PAGES
+
+
+from Deadlywaves import PAGES, hots
 from flask import request
 
 
@@ -101,7 +102,7 @@ layout = html.Div([
     
     html.Div(children=[
         
-        html.Div(id ='pz1av',children ="?") #,html.H3(dbc.Textarea())
+        html.H4(id ='pz1av',children ="?") #,html.H3(dbc.Textarea())
         
     ]),
     
@@ -117,14 +118,16 @@ layout = html.Div([
                 children = dbc.Button(id='Start1',children = "Step 2",href='http://'+hots+':8050/puzzle2',disabled=True)) 
     
     ])
+
+
 @callback(
             [Output(component_id='pz1av', component_property='children'),Output(component_id='Start1', component_property='disabled')],
-            Input("page1complete", "n_clicks"),
+            [Input("page1complete", "n_clicks")],
             State('pz1a', 'value'),           
-            prevent_initial_call=False  
+            prevent_initial_call=True  
         )
 
-def check_pz (value,n_clicks) :
+def check_pz (n_clicks,value) :
     if ( value == pz1a ) :
         print("c'ests bon")
         return ["Correct !",False]
