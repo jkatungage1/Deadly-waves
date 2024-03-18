@@ -121,7 +121,7 @@ layout = html.Div([
     
     html.Div(children=[
         
-        html.H4(id ='pz1av',children ="?") 
+        html.H4(id ='pz2av',children ="?") 
         #,html.H3(dbc.Textarea())
         
     ]),
@@ -152,7 +152,7 @@ layout = html.Div([
 ])
 
 @callback(
-    [Output("frequences","disabled"),Output("pz1av","children")],
+    [Output("frequences","disabled"),Output("pz2av","children")],
     Input("Start2","n_clicks"),
     [State("functions1","value"),State("functions2","value"),State("functions3","value")],
     prevent_initial_call=True  
