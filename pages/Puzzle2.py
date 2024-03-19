@@ -64,7 +64,7 @@ layout = html.Div([
                                             'padding-left' :str(img_width/2)+'px'
                                             
     }),
-            html.Div([dcc.Dropdown(options=["cos * sin","vert = (e^ix+e^−ix) / 2 et rouge = e^ix-e^−ix / 2i","cos(x)","rouge = (e^ix+e^−ix) / 2  et vert = e^ix-e^−ix / 2i "]
+            html.Div([dcc.Dropdown(options=["green =sin(2x) et red = sin(x+2)",  "green = (e^ix+e^−ix) / 2 et red = e^ix-e^−ix / 2i",  "green =sin(x) et red = sin(x+2)",  "red = (e^ix+e^−ix) / 2  et green = e^ix-e^−ix / 2i"]
                                    ,id='functions1',style={
                 
                 'margin-left' : '25px',                                                             
@@ -72,7 +72,7 @@ layout = html.Div([
                 
                                                    
             },disabled=False),
-                      dcc.Dropdown(options=["cos * sin","vert = (e^ix+e^−ix) / 2 et rouge = e^ix-e^−ix / 2i","cos(x)","rouge = (e^ix+e^−ix) / 2  et vert = e^ix-e^−ix / 2i "]
+                      dcc.Dropdown(options=["cos(xy) * sin(xy)","x(e^ixy+e^−ixy / 2)","cos(xy)","(e^ix+e^−ix) / 2  + e^ix-e^−ix / 2i"]
                                    ,id='functions2',style={
                 
                 'margin-left' : '160px',                                                             
@@ -81,7 +81,7 @@ layout = html.Div([
                 
             },disabled=False),
                       
-                      dcc.Dropdown(options=["cos * sin","vert = (e^ix+e^−ix) / 2 et rouge = e^ix-e^−ix / 2i","cos(x)","rouge = (e^ix+e^−ix) / 2  et vert = e^ix-e^−ix / 2i "]
+                      dcc.Dropdown(options=["cos(x²)","x(e^ixy+e^−ixy / 2)","e^ix-e^−ix / 2i","e^ixy+e^−iyx / 2"]
                                    ,id='functions3',style={
                
                 'margin-left' : '220px',                                                             
@@ -98,44 +98,44 @@ layout = html.Div([
             
    
  
-    html.Div([
+    # html.Div([
         
-        #Image 1 input
-        html.Img(id='pz4',
-                        src=pz4,style={
-                                            'width':str(img_width)+'px',
-                                            'height':str(img_height)+'px',
-                                            'padding-top': '0px',
-                                            'padding-left' :'600px'}),
+    #     #Image 1 input
+    #     html.Img(id='pz4',
+    #                     src=pz4,style={
+    #                                         'width':str(img_width)+'px',
+    #                                         'height':str(img_height)+'px',
+    #                                         'padding-top': '0px',
+    #                                         'padding-left' :'600px'}),
         
-        html.Button(style ={
+    #     html.Button(style ={
                 
-                'width':'100px',
-                'height':'30px',
-                'line-height': '15px',
-                'verticalAlign':'middle'
-                            },
-                    children = 'Submit', id='submit-val', n_clicks=0)
-        ]),
+    #             'width':'100px',
+    #             'height':'30px',
+    #             'line-height': '15px',
+    #             'greenicalAlign':'middle'
+    #                         },
+    #                 children = 'Submit', id='submit-val', n_clicks=0)
+    #     ]),
     
     
     html.Div(children=[
         
         html.H4(id ='pz2av',children ="?") 
-        #,html.H3(dbc.Textarea())
+        ,html.H3(dcc.Link("Need help ?  :) ( ctrl+click on this ) ", href="https://www.geogebra.org/classic?lang=fr"))
         
     ]),
     
           
     
-    dcc.Dropdown(options=[300,500,1000,10000],id='frequences',style={
-                # 'width':'60%',
-                'padding-left' : '50%',                                                             
-                'width':'100px',
-                'height':'auto',
-                'padding-top': '0px',
-                'padding-left' :'0px'                                     
-            },disabled=True,),
+    # dcc.Dropdown(options=[300,500,1000,10000],id='frequences',style={
+    #             # 'width':'60%',
+    #             'padding-left' : '50%',                                                             
+    #             'width':'100px',
+    #             'height':'auto',
+    #             'padding-top': '0px',
+    #             'padding-left' :'0px'                                     
+    #         },disabled=True,),
     
 
     
@@ -152,23 +152,23 @@ layout = html.Div([
 ])
 
 @callback(
-    [Output("frequences","disabled"),Output("pz2av","children")],
-    Input("Start2","n_clicks"),
-    [State("functions1","value"),State("functions2","value"),State("functions3","value")],
+    [Output("Start2","disabled"),Output("pz2av","children")],
+    [Input("functions1","value"),Input("functions2","value"),Input("functions3","value")],
     prevent_initial_call=True  
 )
-def check_pz2 ( n_clicks, value1, value2, value3 ) :
+def check_pz2 ( value1, value2, value3 ) :
     
-    if (value1 == " ") :
-        None
-        if (value2 == " ") :
+    if (value1 == "red = (e^ix+e^−ix) / 2  et green = e^ix-e^−ix / 2i") :
+        
+        if (value2 == "x(e^ixy+e^−ixy / 2)") :
             
-            return [False, "Vous pouvez passer à la suite !! "] 
-            if(value3 == " "):
-                return [False, "Vous pouvez passer à la suite !! "]  
-            else : None
+            if(value3 == "e^ixy+e^−iyx / 2"):
+                return [False, "Sucess, you may go on to the next mission recruit. "]  
+            else : return [True, "Common ! It's the last one ! "]
+            
+        else : return [True, "two are wrong still !! "]       
     else : 
-        return [True, "Le premier est faux ! "]           
+        return [True,"GO GO GO !"]           
                 
 # @callback(
 #     Output("Start2","disabled"),

@@ -16,7 +16,7 @@ pz34 = "https://cdn.discordapp.com/attachments/1075182862598414377/1219393414588
 
 
 d.register_page(__name__) #'/' means it's the maine page
-victoire = 'oui'
+victoire = 'jacques'
 
 
 layout = html.Div([
